@@ -36,6 +36,14 @@ stages:
       inputs:
         versionSpec: '10.23.1'
       displayName: 'Install Node.js'
+
+    - task: DownloadPipelineArtifact@2
+      inputs:
+        source: 'specific'
+        project: 'c7f21416-8321-442c-8543-b51f1f7aa6da'
+        pipeline: 3438
+        artifact: 'extra'
+        path: '$(Build.SourcesDirectory)' 
     
     - script: |
         yarn kbn bootstrap
