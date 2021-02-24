@@ -1,0 +1,56 @@
+# /*********************************************************************************
+# Role ........ : Pipeline Azure pour le déploiement de Kibana
+# Auteur ...... : Alexandre Delisle
+# 
+# © 2020 Service Makila Inc.
+# Service Makila Inc. retains all right, title and interest to
+# this software and all related intellectual property.  You may not reproduce,
+# copy, or redistribute this software without the express written permission of
+# Service Makila Inc.
+# 
+# © 2020 Service Makila Inc.
+# Service Makila Inc. conserve tous les droits, titres et intérêts
+# dans ce logiciel et dans toute propriété intellectuelle s'y rapportant.
+# Vous ne pouvez reproduire, copier ou redistribuer ce logiciel
+# sans l'autorisation écrite expresse de Service Makila Inc.
+# 
+# *********************************************************************************/
+
+trigger:
+  branches:
+    include:
+    - makila-v*
+
+stages:
+- stage: Build
+  displayName: Publish Kibana resources
+  jobs:
+  - job: Publish
+    displayName: Publish Kibana resources
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - checkout: self
+    
+    - script: |
+        yarn kbn bootstrap
+      displayName: 'Bootstrap Kibana'
+    
+    - script: |
+        node scripts/build --no-oss --skip-os-packages --release --version-qualifier release-$BUILD_BUILDNUMBER
+      displayName: 'Build distributable'
+    
+    - task: CopyFiles@2
+      inputs:
+        SourceFolder: '$(Build.SourcesDirectory)'
+        Contents: |
+          target/**
+        TargetFolder: '$(Build.ArtifactStagingDirectory)'
+        CleanTargetFolder: true
+      displayName: 'Prepare for release'
+
+    - task: PublishPipelineArtifact@1
+      inputs:
+        targetPath: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'distributable'
+      displayName: 'Release Kibana distributable'
