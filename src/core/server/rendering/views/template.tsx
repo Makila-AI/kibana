@@ -35,7 +35,7 @@ export const Template: FunctionComponent<Props> = ({
         <meta charSet="utf-8" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <meta name="viewport" content="width=device-width" />
-        <title>Elastic</title>
+        <title>Makila</title>
         <Fonts url={uiPublicUrl} />
         {/* The alternate icon is a fallback for Safari which does not yet support SVG favicons */}
         <link rel="alternate icon" type="image/png" href={`${uiPublicUrl}/favicons/favicon.png`} />
@@ -47,6 +47,11 @@ export const Template: FunctionComponent<Props> = ({
         {/* Inject stylesheets into the <head> before scripts so that KP plugins with bundled styles will override them */}
         <meta name="add-styles-here" />
         <meta name="add-scripts-here" />
+        <link
+          rel="stylesheet"
+          type="text/css"
+          href={`${uiPublicUrl}/makila/main.${darkMode ? 'dark' : 'light'}.css`}
+        />
       </head>
       <body>
         {createElement('kbn-csp', {
