@@ -13,10 +13,8 @@ import { AppCategory } from '../types';
 export const DEFAULT_APP_CATEGORIES: Record<string, AppCategory> = Object.freeze({
   kibana: {
     id: 'kibana',
-    label: i18n.translate('core.ui.kibanaNavList.label', {
-      defaultMessage: 'Analytics',
-    }),
-    euiIconType: 'logoKibana',
+    label: 'Makila',
+    euiIconType: '../ui/favicons/favicon-32x32.png',
     order: 1000,
   },
   enterpriseSearch: {
