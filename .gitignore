@@ -1,3 +1,4 @@
+src/core/server/core_app/assets/makila
 .aws-config.json
 .signing-config.json
 .ackrc
