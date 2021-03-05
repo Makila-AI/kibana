@@ -22,7 +22,7 @@ export function HeaderBreadcrumbs({ breadcrumbs$ }: Props) {
   let crumbs = breadcrumbs;
 
   if (breadcrumbs.length === 0) {
-    crumbs = [{ text: 'Kibana' }];
+    crumbs = [{ text: '' }];
   }
 
   crumbs = crumbs.map((breadcrumb, i) => ({
