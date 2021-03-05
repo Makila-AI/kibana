@@ -23,7 +23,12 @@ export function HeaderBreadcrumbs({ breadcrumbs$ }: Props) {
 
   if (breadcrumbs.length === 0) {
     crumbs = [{ text: 'Kibana' }];
-  }
+  // if (breadcrumbs.length === 0 && appTitle) {
+  //   crumbs = [{ text: appTitle }];
+  //   if (appTitle === 'Kibana') {
+  //     crumbs = [{ text: '' }];
+  //   }
+  // }
 
   crumbs = crumbs.map((breadcrumb, i) => ({
     ...breadcrumb,
