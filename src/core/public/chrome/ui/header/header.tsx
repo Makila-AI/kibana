@@ -112,7 +112,7 @@ export function Header({
       <header className={className} data-test-subj="headerGlobalNav">
         <div id="globalHeaderBars" className="header__bars">
           <EuiHeader
-            theme="dark"
+            theme="default"
             position="fixed"
             className="header__firstBar"
             sections={[
