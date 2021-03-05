@@ -25,6 +25,9 @@ export function HeaderBreadcrumbs({ appTitle$, breadcrumbs$ }: Props) {
 
   if (breadcrumbs.length === 0 && appTitle) {
     crumbs = [{ text: appTitle }];
+    if (appTitle === 'Kibana') {
+      crumbs = [{ text: '' }];
+    }
   }
 
   crumbs = crumbs.map((breadcrumb, i) => ({
