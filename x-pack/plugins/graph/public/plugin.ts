@@ -79,7 +79,7 @@ export class GraphPlugin
 
     core.application.register({
       id: 'graph',
-      title: 'Graph',
+      title: i18n.translate('xpack.graph.pageTitle', { defaultMessage: 'Graph' }),
       order: 6000,
       appRoute: '/app/graph',
       euiIconType: 'logoKibana',
