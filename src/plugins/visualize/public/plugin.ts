@@ -130,7 +130,9 @@ export class VisualizePlugin
 
     core.application.register({
       id: VisualizeConstants.APP_ID,
-      title: 'Visualize Library',
+      title: i18n.translate('visualize.helpMenu.appName', {
+        defaultMessage: 'Visualize',
+      }),
       order: 8000,
       euiIconType: 'logoKibana',
       defaultPath: '#/',
