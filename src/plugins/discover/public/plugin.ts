@@ -238,7 +238,9 @@ export class DiscoverPlugin
     this.docViewsRegistry.setAngularInjectorGetter(this.getEmbeddableInjector);
     core.application.register({
       id: 'discover',
-      title: 'Discover',
+      title: i18n.translate('discover.discoverTitle', {
+        defaultMessage: 'Discover',
+      }),
       updater$: this.appStateUpdater.asObservable(),
       order: 1000,
       euiIconType: 'logoKibana',
