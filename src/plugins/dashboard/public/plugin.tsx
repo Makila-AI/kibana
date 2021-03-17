@@ -284,7 +284,9 @@ export class DashboardPlugin
 
     const app: App = {
       id: DashboardConstants.DASHBOARDS_ID,
-      title: 'Dashboard',
+      title: i18n.translate('dashboard.featureCatalogue.dashboardTitle', {
+        defaultMessage: 'Dashboard',
+      }),
       order: 2500,
       euiIconType: 'logoKibana',
       defaultPath: `#${DashboardConstants.LANDING_PAGE_PATH}`,
