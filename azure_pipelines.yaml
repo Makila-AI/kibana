@@ -33,7 +33,7 @@ stages:
 
     - task: NodeTool@0
       inputs:
-        versionSpec: '10.23.1'
+        versionSpec: '14.16.1'
       displayName: 'Install Node.js'
 
     - task: DownloadPipelineArtifact@2
