@@ -13,6 +13,7 @@
 node_modules
 target
 snapshots.js
+disabledPlugins
 
 !/.ci
 !/.eslintrc.js
