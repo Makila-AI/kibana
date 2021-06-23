@@ -55,7 +55,7 @@ export async function runBuildRefsCli() {
           outDirs,
           repoRoot: REPO_ROOT,
           workingDir: CACHE_WORKING_DIR,
-          upstreamUrl: 'https://github.com/elastic/kibana.git',
+          upstreamUrl: 'https://github.com/makila-inc/kibana.git',
         });
       }
 
