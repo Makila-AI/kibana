@@ -123,6 +123,7 @@ export class AdvancedUiActionsPublicPlugin
       openModal,
       dateFormat,
       commonlyUsedRanges,
+      i18nStart: core.i18n,
     });
     uiActions.addTriggerAction(CONTEXT_MENU_TRIGGER, timeRangeAction);
 
@@ -130,6 +131,7 @@ export class AdvancedUiActionsPublicPlugin
       openModal,
       dateFormat,
       commonlyUsedRanges,
+      i18nStart: core.i18n,
     });
     uiActions.addTriggerAction(PANEL_BADGE_TRIGGER, timeRangeBadge);
 

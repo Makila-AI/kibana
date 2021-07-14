@@ -76,7 +76,7 @@ import {
   HandlerContextType,
   HandlerParameters,
 } from './context';
-
+export { getPropsLoc } from './i18n/i18n_eui_mapping';
 export { PackageInfo, EnvironmentMode } from '../server/types';
 /** @interal */
 export { CoreContext, CoreSystem } from './core_system';

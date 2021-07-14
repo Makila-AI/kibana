@@ -177,6 +177,7 @@ export class AuthorizationService {
         const styleSheetPaths = [
           `${regularBundlePath}/kbn-ui-shared-deps/${UiSharedDeps.baseCssDistFilename}`,
           `${regularBundlePath}/kbn-ui-shared-deps/${UiSharedDeps.lightCssDistFilename}`,
+          `${regularBundlePath}/kbn-ui-shared-deps/${UiSharedDeps.lightMakilaCssDistFilename}`,
           `${basePath}/node_modules/@kbn/ui-framework/dist/kui_light.css`,
           `${basePath}/ui/legacy_light_theme.css`,
         ];

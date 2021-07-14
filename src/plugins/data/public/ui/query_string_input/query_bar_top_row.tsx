@@ -41,6 +41,7 @@ import QueryStringInputUI from './query_string_input';
 import { doesKueryExpressionHaveLuceneSyntaxError, UI_SETTINGS } from '../../../common';
 import { PersistedLog, getQueryLog } from '../../query';
 import { NoDataPopover } from './no_data_popover';
+import { getPropsLoc } from '../../../../../core/public';
 
 const QueryStringInput = withKibana(QueryStringInputUI);
 
@@ -207,7 +208,8 @@ export default function QueryBarTopRow(props: QueryBarTopRowProps) {
       toAbsoluteString(from),
       toAbsoluteString(to),
       [],
-      uiSettings.get('dateFormat')
+      uiSettings.get('dateFormat'),
+      getPropsLoc()
     );
     return (
       <div
