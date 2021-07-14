@@ -53,6 +53,11 @@ export const darkV8CssDistFilename: string;
 export const lightCssDistFilename: string;
 
 /**
+ * Filename of the makila-theme css file in the distributable directory
+ */
+export const lightMakilaCssDistFilename: string;
+
+/**
  * Filename of the light-theme css file in the distributable directory
  */
 export const lightV8CssDistFilename: string;

@@ -86,10 +86,22 @@ export function uiRenderMixin(kbnServer, server, config) {
           ? await uiSettings.get('theme:darkMode')
           : false;
 
-      const themeVersion =
-        !authEnabled || request.auth.isAuthenticated ? await uiSettings.get('theme:version') : 'v7';
+      const themeVersion = (!authEnabled || request.auth.isAuthenticated
+        ? await uiSettings.get('theme:version')
+        : 'v7'
+      ).substr(0, 2);
 
-      const themeTag = `${themeVersion === 'v7' ? 'v7' : 'v8'}${darkMode ? 'dark' : 'light'}`;
+      const isMakilaTheme =
+        (!authEnabled || request.auth.isAuthenticated
+          ? await uiSettings.get('theme:version')
+          : 'v7'
+        )
+          .toLowerCase()
+          .indexOf('makila') >= 0;
+
+      const themeTag = `${themeVersion === 'v7' ? 'v7' : 'v8'}${isMakilaTheme ? 'makila' : ''}${
+        darkMode ? 'dark' : 'light'
+      }`;
 
       const buildHash = server.newPlatform.env.packageInfo.buildNum;
       const basePath = config.get('server.basePath');
@@ -107,8 +119,11 @@ export function uiRenderMixin(kbnServer, server, config) {
               `${basePath}/ui/legacy_dark_theme.css`,
             ]
           : [
+              // eslint-disable-next-line no-nested-ternary
               themeVersion === 'v7'
-                ? `${regularBundlePath}/kbn-ui-shared-deps/${UiSharedDeps.lightCssDistFilename}`
+                ? isMakilaTheme
+                  ? `${regularBundlePath}/kbn-ui-shared-deps/${UiSharedDeps.lightMakilaCssDistFilename}`
+                  : `${regularBundlePath}/kbn-ui-shared-deps/${UiSharedDeps.lightCssDistFilename}`
                 : `${regularBundlePath}/kbn-ui-shared-deps/${UiSharedDeps.lightV8CssDistFilename}`,
               `${basePath}/node_modules/@kbn/ui-framework/dist/kui_light.css`,
               `${basePath}/ui/legacy_light_theme.css`,

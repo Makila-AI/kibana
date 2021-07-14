@@ -24,6 +24,7 @@ exports.jsDepFilenames = ['kbn-ui-shared-deps.@elastic.js'];
 exports.jsFilename = 'kbn-ui-shared-deps.js';
 exports.baseCssDistFilename = 'kbn-ui-shared-deps.css';
 exports.lightCssDistFilename = 'kbn-ui-shared-deps.v7.light.css';
+exports.lightMakilaCssDistFilename = 'kbn-ui-shared-deps.v7.makila.light.css';
 exports.lightV8CssDistFilename = 'kbn-ui-shared-deps.v8.light.css';
 exports.darkCssDistFilename = 'kbn-ui-shared-deps.v7.dark.css';
 exports.darkV8CssDistFilename = 'kbn-ui-shared-deps.v8.dark.css';

@@ -28,12 +28,18 @@ export type Theme = typeof LightTheme;
 export const tag: string = globals.__kbnThemeTag__ || 'v7light';
 export const version = tag.startsWith('v7') ? 7 : 8;
 export const darkMode = tag.endsWith('dark');
+export const isMakilaTheme = tag.toLowerCase().indexOf('makila') >= 0;
 
 export let euiLightVars: Theme;
 export let euiDarkVars: Theme;
 if (version === 7) {
-  euiLightVars = require('@elastic/eui/dist/eui_theme_light.json');
-  euiDarkVars = require('@elastic/eui/dist/eui_theme_dark.json');
+  if (isMakilaTheme) {
+    euiLightVars = require('@elastic/eui/dist/eui_theme_makila_light.json');
+    euiDarkVars = require('@elastic/eui/dist/eui_theme_makila_light.json');
+  } else {
+    euiLightVars = require('@elastic/eui/dist/eui_theme_light.json');
+    euiDarkVars = require('@elastic/eui/dist/eui_theme_dark.json');
+  }
 } else {
   euiLightVars = require('@elastic/eui/dist/eui_theme_amsterdam_light.json');
   euiDarkVars = require('@elastic/eui/dist/eui_theme_amsterdam_dark.json');

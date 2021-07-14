@@ -39,6 +39,23 @@ interface FontFace {
 }
 
 export const Fonts: FunctionComponent<Props> = ({ url }) => {
+  const makila: FontFace = {
+    family: 'Indie Flower',
+    variants: [
+      {
+        style: 'normal',
+        weight: 400,
+        sources: [
+          'Indie Flower',
+          'IndieFlower-Regular',
+          `${url}/fonts/makila/IndieFlower-Regular.ttf`,
+        ],
+        unicodeRange:
+          'U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD',
+      },
+    ],
+  };
+
   const interUi: FontFace = {
     family: 'Inter UI',
     variants: [
@@ -245,7 +262,7 @@ export const Fonts: FunctionComponent<Props> = ({ url }) => {
     <style
       dangerouslySetInnerHTML={{
         __html: `
-        ${[interUi, roboto]
+        ${[interUi, roboto, makila]
           .flatMap(({ family, variants }) =>
             variants.map(({ style, weight, format, sources, unicodeRange }) => {
               const src = sources
