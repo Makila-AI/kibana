@@ -64,6 +64,7 @@ import { ApplicationSetup, Capabilities, ApplicationStart } from './application'
 import { DocLinksStart } from './doc_links';
 import { SavedObjectsStart } from './saved_objects';
 import { DeprecationsServiceStart } from './deprecations';
+export { getPropsLoc } from './i18n/i18n_eui_mapping';
 
 export type {
   PackageInfo,

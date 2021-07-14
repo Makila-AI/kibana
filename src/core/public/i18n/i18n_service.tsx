@@ -10,7 +10,8 @@ import React from 'react';
 import { EuiContext } from '@elastic/eui';
 import { I18nProvider } from '@kbn/i18n/react';
 
-import { getEuiContextMapping } from './i18n_eui_mapping';
+import { i18n } from '@kbn/i18n';
+import { getEuiContextMapping, getEuiContextMklMappingFuncProps } from './i18n_eui_mapping';
 
 /**
  * Service that is responsible for i18n capabilities.
@@ -27,6 +28,7 @@ export class I18nService {
    */
   public getContext(): I18nStart {
     const euiContextMapping = getEuiContextMapping();
+    const mklMappingFuncProps = getEuiContextMklMappingFuncProps();
 
     const mapping = {
       ...euiContextMapping,
@@ -35,7 +37,15 @@ export class I18nService {
       Context: function I18nContext({ children }) {
         return (
           <I18nProvider>
-            <EuiContext i18n={{ mapping }}>{children}</EuiContext>
+            <EuiContext
+              i18n={{
+                mapping,
+                locale: i18n.getLocale(),
+                mklMappingFuncProps,
+              }}
+            >
+              {children}
+            </EuiContext>
           </I18nProvider>
         );
       },

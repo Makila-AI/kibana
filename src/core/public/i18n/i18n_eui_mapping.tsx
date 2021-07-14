@@ -6,7 +6,7 @@
  * Side Public License, v 1.
  */
 
-import React from 'react';
+import React, { ReactChild } from 'react';
 import { i18n } from '@kbn/i18n';
 import { FormattedMessage } from '@kbn/i18n/react';
 import { EuiTokensObject } from '@elastic/eui';
@@ -837,13 +837,18 @@ export const getEuiContextMapping = (): EuiTokensObject => {
     'euiRefreshInterval.stop': i18n.translate('core.euiRefreshInterval.stop', {
       defaultMessage: 'Stop',
     }),
-    'euiRelativeTab.fullDescription': ({ unit }: EuiValues) =>
+    'euiRelativeTab.fullDescription': ({ timeUnit }: EuiValues) =>
       i18n.translate('core.euiRelativeTab.fullDescription', {
-        defaultMessage: 'The unit is changeable. Currently set to {unit}.',
-        values: { unit },
+        defaultMessage: 'The unit is changeable. Currently set to {timeUnit}.',
+        values: { timeUnit },
       }),
     'euiRelativeTab.relativeDate': ({ position }: EuiValues) =>
       i18n.translate('core.euiRelativeTab.relativeDate', {
+        defaultMessage: '{position} date',
+        values: { position },
+      }),
+    'euiAbsoluteTab.absoluteDate': ({ position }: EuiValues) =>
+      i18n.translate('core.euiAbsoluteTab.absoluteDate', {
         defaultMessage: '{position} date',
         values: { position },
       }),
@@ -1195,5 +1200,138 @@ export const getEuiContextMapping = (): EuiTokensObject => {
         defaultMessage: '{eventName} is unread',
         values: { eventName },
       }),
+    'euiMakila.datePicker.euiDatePopoverContent.now.infos': i18n.translate(
+      'core.euiMakila.datePicker.euiDatePopoverContent.now.infos',
+      {
+        defaultMessage:
+          'Setting the time to &quot;now&quot; means that on every refresh this time will be set to the time of the refresh.',
+      }
+    ),
+    'euiMakila.datePicker.euiDatePopoverContent.now.button': ({ position }: EuiValues) =>
+      i18n.translate('core.euiMakila.datePicker.euiDatePopoverContent.now.button', {
+        defaultMessage: 'Set {position} date and time to now',
+        values: { position },
+      }),
+    'euiMakila.datePicker.euiRecentlyUsed': i18n.translate(
+      'core.euiMakila.datePicker.euiRecentlyUsed',
+      {
+        defaultMessage: 'Recently used date ranges',
+      }
+    ),
+    'euiMakila.datePicker.tabAbsolute': i18n.translate('core.euiMakila.datePicker.tabAbsolute', {
+      defaultMessage: 'Absolute',
+    }),
+    'euiMakila.datePicker.tabRelative': i18n.translate('core.euiMakila.datePicker.tabRelative', {
+      defaultMessage: 'Relative',
+    }),
+    'euiMakila.datePicker.tabNow': i18n.translate('core.euiMakila.datePicker.tabNow', {
+      defaultMessage: 'Now',
+    }),
+    'euiMakila.datePicker.now': i18n.translate('core.euiMakila.datePicker.now', {
+      defaultMessage: 'now',
+    }),
+    'euiMakila.datePicker.expectedFormat': ({ format }: EuiValues) =>
+      i18n.translate('core.euiMakila.datePicker.expectedFormat', {
+        defaultMessage: 'Expected format {format}',
+        values: { format },
+      }),
+    'euiMakila.datePicker.commonlyUsedValue': ({ timeRange }: EuiValues) =>
+      i18n.translate('core.euiMakila.datePicker.commonlyUsedValue', {
+        defaultMessage: '{timeRange}',
+        values: { timeRange },
+      }),
+    'euiMakila.datePicker.commonDurationRanges': ({ timeRange }: EuiValues) =>
+      i18n.translate('core.euiMakila.datePicker.commonDurationRanges', {
+        defaultMessage: '{timeRange}',
+        values: { timeRange },
+      }),
+    'euiMakila.datePicker.timeTenseOptions': ({ timeTense }: EuiValues) =>
+      i18n.translate('core.euiMakila.datePicker.timeTenseOptions', {
+        defaultMessage: '{timeTense}',
+        values: { timeTense },
+      }),
+    'euiMakila.datePicker.refreshUnitsOptions': ({ timeUnit }: EuiValues) =>
+      i18n.translate('core.euiMakila.datePicker.refreshUnitsOptions', {
+        defaultMessage: '{timeUnit}',
+        values: { timeUnit },
+      }),
+    'euiMakila.datePicker.timeUnitsOptions': ({ timeUnit }: EuiValues) =>
+      i18n.translate('core.euiMakila.datePicker.timeUnitsOptions', {
+        defaultMessage: '{timeUnit}',
+        values: { timeUnit },
+      }),
+    'euiMakila.datePicker.timeRelativeOptions': ({ timeRelative }: EuiValues) =>
+      i18n.translate('core.euiMakila.datePicker.timeRelativeOptions', {
+        defaultMessage: '{timeRelative}',
+        values: { timeRelative },
+      }),
+    'euiMakila.datePicker.roundedToThe': i18n.translate('core.euiMakila.datePicker.roundedToThe', {
+      defaultMessage: 'rounded to the',
+    }),
   };
+};
+
+export const getEuiContextMklMappingFuncProps = () => {
+  return (propsName: string, propsValue?: ReactChild): ReactChild | undefined => {
+    if (propsValue) {
+      const result = i18n.translate(`core.euiMakila.props.${propsName}.${propsValue}`, {
+        defaultMessage: propsValue.toString(),
+      });
+      // if (!i18n.getLocale().startsWith('en') && result === propsValue.toString()) {
+      // console.log(`core.euiMakila.props.${propsName}.${propsValue}`, result);
+      // }
+      return result;
+    } else {
+      return '';
+    }
+  };
+};
+
+export const getPropsLoc = () => {
+  const timeUnits = {
+    s: 'second',
+    m: 'minute',
+    h: 'hour',
+    d: 'day',
+    w: 'week',
+    M: 'month',
+    y: 'year',
+  };
+  const timeUnitsPlural = {
+    s: 'seconds',
+    m: 'minutes',
+    h: 'hours',
+    d: 'days',
+    w: 'weeks',
+    M: 'months',
+    y: 'years',
+  };
+  const fP = getEuiContextMklMappingFuncProps();
+  const propsLoc = {
+    timeTenseLastLabel: i18n.translate('core.euiMakila.props.timeTense.Last', {
+      defaultMessage: 'Last',
+    }) as any,
+    timeTenseNextLabel: i18n.translate('core.euiMakila.props.timeTense.Next', {
+      defaultMessage: 'Next',
+    }) as any,
+    roundedToTheLabel: i18n.translate('core.euiMakila.datePicker.roundedToThe', {
+      defaultMessage: 'rounded to the',
+    }) as any,
+    timeUnitsPlural: Object.keys(timeUnitsPlural).reduce(
+      (p, k) => ({
+        ...p,
+        [k]: fP('timeUnit', (timeUnitsPlural as any)[k as any]),
+      }),
+      {} as any
+    ),
+    timeUnits: Object.keys(timeUnits).reduce(
+      (p, k) => ({
+        ...p,
+        [k]: fP('timeUnit', (timeUnits as any)[k as any]),
+      }),
+      {} as any
+    ),
+    locale: i18n.getLocale(),
+  };
+  return propsLoc;
 };
