@@ -13,6 +13,7 @@ import {
   EmbeddableInput,
   EmbeddableOutput,
 } from 'src/plugins/embeddable/public';
+import { CoreStart } from 'kibana/public';
 import { Action, IncompatibleActionError } from '../../../../src/plugins/ui_actions/public';
 import { TimeRange } from '../../../../src/plugins/data/public';
 import { OpenModal, CommonlyUsedRange } from './types';
@@ -50,19 +51,23 @@ export class CustomTimeRangeAction implements Action<TimeRangeActionContext> {
   private commonlyUsedRanges: CommonlyUsedRange[];
   public readonly id = CUSTOM_TIME_RANGE;
   public order = 30;
+  private i18nStart: CoreStart['i18n'];
 
   constructor({
     openModal,
     dateFormat,
     commonlyUsedRanges,
+    i18nStart,
   }: {
     openModal: OpenModal;
     dateFormat: string;
     commonlyUsedRanges: CommonlyUsedRange[];
+    i18nStart: CoreStart['i18n'];
   }) {
     this.openModal = openModal;
     this.dateFormat = dateFormat;
     this.commonlyUsedRanges = commonlyUsedRanges;
+    this.i18nStart = i18nStart;
   }
 
   public getDisplayName() {
@@ -100,12 +105,14 @@ export class CustomTimeRangeAction implements Action<TimeRangeActionContext> {
         (m) => m.CustomizeTimeRangeModal
       );
       const modalSession = this.openModal(
-        <CustomizeTimeRangeModal
-          onClose={() => modalSession.close()}
-          embeddable={embeddable}
-          dateFormat={this.dateFormat}
-          commonlyUsedRanges={this.commonlyUsedRanges}
-        />,
+        <this.i18nStart.Context>
+          <CustomizeTimeRangeModal
+            onClose={() => modalSession.close()}
+            embeddable={embeddable}
+            dateFormat={this.dateFormat}
+            commonlyUsedRanges={this.commonlyUsedRanges}
+          />
+        </this.i18nStart.Context>,
         {
           'data-test-subj': 'customizeTimeRangeModal',
         }

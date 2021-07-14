@@ -27,6 +27,7 @@ import { UI_SETTINGS } from '../../../common';
 import { PersistedLog, getQueryLog } from '../../query';
 import { NoDataPopover } from './no_data_popover';
 import { AutocompleteFtuePopover } from './autocomplete_ftue_popover';
+import { getPropsLoc } from '../../../../../core/public';
 
 const QueryStringInput = withKibana(QueryStringInputUI);
 
@@ -204,7 +205,8 @@ export default function QueryBarTopRow(props: QueryBarTopRowProps) {
       toAbsoluteString(from),
       toAbsoluteString(to),
       [],
-      uiSettings.get('dateFormat')
+      uiSettings.get('dateFormat'),
+      getPropsLoc()
     );
     return (
       <div
