@@ -372,18 +372,38 @@ const getRoboto = (url: string): FontFace => {
   };
 };
 
+const getMakila = (url: string): FontFace => {
+  return {
+    family: 'Indie Flower',
+    variants: [
+      {
+        style: 'normal',
+        weight: 400,
+        sources: [
+          'Indie Flower',
+          'IndieFlower-Regular',
+          `${url}/fonts/makila/IndieFlower-Regular.ttf`,
+        ],
+        unicodeRange:
+          'U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD',
+      },
+    ],
+  };
+};
+
 export const Fonts: FunctionComponent<Props> = ({ url, themeVersion }) => {
   /**
    * If `themeVersion` is not provided, we want to fallback to the newest font family `Inter`
    */
   const sansFont = themeVersion === 'v7' ? getInterUi(url) : getInter(url);
   const codeFont = getRoboto(url);
+  const makilaFont = getMakila(url);
 
   return (
     <style
       dangerouslySetInnerHTML={{
         __html: `
-        ${[sansFont, codeFont]
+        ${[sansFont, codeFont, makilaFont]
           .flatMap(({ family, variants }) =>
             variants.map(({ style, weight, format, sources, unicodeRange }) => {
               const src = sources
