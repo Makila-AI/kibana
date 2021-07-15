@@ -37,6 +37,10 @@ stages:
         versionSpec: '14.17.5'
       displayName: 'Install Node.js'
 
+    - task: npmAuthenticate@0
+      inputs:
+        workingFile: $(Build.SourcesDirectory)/.npmrc
+
     - task: DownloadPipelineArtifact@2
       inputs:
         source: 'specific'
