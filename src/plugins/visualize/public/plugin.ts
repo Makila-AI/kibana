@@ -140,7 +140,7 @@ export class VisualizePlugin
 
     core.application.register({
       id: VisualizeConstants.APP_ID,
-      title: i18n.translate('visualize.helpMenu.appName', {
+      title: i18n.translate('visualize.makila.helpMenu.appName', {
         defaultMessage: 'Visualize',
       }),
       order: 8000,
