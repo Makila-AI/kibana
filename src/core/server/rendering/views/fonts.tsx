@@ -374,18 +374,61 @@ const getRoboto = (url: string): FontFace => {
 
 const getMakila = (url: string): FontFace => {
   return {
-    family: 'Indie Flower',
+    family: 'Catamaran',
     variants: [
       {
         style: 'normal',
+        format: 'truetype',
+        weight: 100,
+        sources: [`${url}/fonts/makila/Catamaran-Thin.ttf`],
+      },
+      {
+        style: 'normal',
+        format: 'truetype',
+        weight: 200,
+        sources: [`${url}/fonts/makila/Catamaran-ExtraLight.ttf`],
+      },
+      {
+        style: 'normal',
+        format: 'truetype',
+        weight: 300,
+        sources: [`${url}/fonts/makila/Catamaran-Light.ttf`],
+      },
+      {
+        style: 'normal',
+        format: 'truetype',
         weight: 400,
-        sources: [
-          'Indie Flower',
-          'IndieFlower-Regular',
-          `${url}/fonts/makila/IndieFlower-Regular.ttf`,
-        ],
-        unicodeRange:
-          'U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD',
+        sources: [`${url}/fonts/makila/Catamaran-Regular.ttf`],
+      },
+      {
+        style: 'normal',
+        format: 'truetype',
+        weight: 500,
+        sources: [`${url}/fonts/makila/Catamaran-Medium.ttf`],
+      },
+      {
+        style: 'normal',
+        format: 'truetype',
+        weight: 600,
+        sources: [`${url}/fonts/makila/Catamaran-SemiBold.ttf`],
+      },
+      {
+        style: 'normal',
+        format: 'truetype',
+        weight: 700,
+        sources: [`${url}/fonts/makila/Catamaran-Bold.ttf`],
+      },
+      {
+        style: 'normal',
+        format: 'truetype',
+        weight: 800,
+        sources: [`${url}/fonts/makila/Catamaran-ExtraBold.ttf`],
+      },
+      {
+        style: 'normal',
+        format: 'truetype',
+        weight: 900,
+        sources: [`${url}/fonts/makila/Catamaran-Black.ttf`],
       },
     ],
   };
