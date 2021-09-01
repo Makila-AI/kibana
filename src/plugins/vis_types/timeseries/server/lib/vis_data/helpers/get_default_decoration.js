@@ -29,6 +29,7 @@ export const getDefaultDecoration = (series) => {
       show: series.chart_type === 'bar',
       fill: Number(series.fill),
       lineWidth: Number(series.line_width),
+      showValueLabel: Boolean(series.show_value_label),
     },
   };
 };
