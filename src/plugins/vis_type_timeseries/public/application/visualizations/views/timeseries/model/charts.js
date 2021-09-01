@@ -34,6 +34,7 @@ const BarChart = {
     fill: PropTypes.number,
     lineWidth: PropTypes.number,
     show: PropTypes.boolean,
+    showValueLabel: PropTypes.bool,
   }).isRequired,
 };
 

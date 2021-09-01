@@ -316,6 +316,11 @@ export const TimeseriesConfig = injectI18n(function (props) {
             />
           </EuiFormRow>
         </EuiFlexItem>
+        <EuiFlexItem grow={false}>
+          <EuiFormLabel>Show value label</EuiFormLabel>
+          <EuiSpacer size="s" />
+          <YesNo value={model.show_value_label} name="show_value_label" onChange={props.onChange} />
+        </EuiFlexItem>
       </EuiFlexGroup>
     );
   }
