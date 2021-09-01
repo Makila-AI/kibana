@@ -42,6 +42,7 @@ export function BarSeriesDecorator({
   y1AccessorFormat,
   y0AccessorFormat,
   tickFormat,
+  showValueLabel,
 }) {
   const id = seriesId;
   const groupId = seriesGroupId;
@@ -75,7 +76,7 @@ export function BarSeriesDecorator({
     seriesSettings.histogramModeAlignment = 'center';
   }
 
-  return <BarSeries {...seriesSettings} />;
+  return <BarSeries {...seriesSettings} displayValueSettings={{ showValueLabel }} />;
 }
 
 BarSeriesDecorator.propTypes = ChartsEntities.BarChart;
