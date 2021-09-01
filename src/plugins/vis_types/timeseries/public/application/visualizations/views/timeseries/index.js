@@ -163,7 +163,21 @@ export const TimeSeries = ({
             },
           },
           hasBarChart
-            ? {}
+            ? {
+                // barSeriesStyle: { A DECOMMENTER POUR charts >= v24
+                //   displayValue: {
+                //     fontSize: {
+                //       min: 10,
+                //       max: 25
+                //     },
+                //     fill: "#000",
+                //     alignment: {
+                //       horizontal: "center",
+                //       vertical: "middle"
+                //     }
+                //   }
+                // }
+              }
             : {
                 crosshair: {
                   band: {
@@ -269,6 +283,7 @@ export const TimeSeries = ({
                 y1AccessorFormat={y1AccessorFormat}
                 y0AccessorFormat={y0AccessorFormat}
                 tickFormat={tickFormat}
+                showValueLabel={!!bars.showValueLabel}
               />
             );
           }
