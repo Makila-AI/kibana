@@ -28,6 +28,7 @@ stages:
   - job: Publish
     displayName: Publish Kibana resources
     pool: 'Makila Pool'
+    timeoutInMinutes: 300
     steps:
     - checkout: self
 
