@@ -49,7 +49,7 @@ stages:
       displayName: 'Bootstrap Kibana'
     
     - script: |
-        node scripts/build --no-oss --skip-os-packages --release --version-qualifier release-$BUILD_BUILDNUMBER
+        node scripts/build --skip-os-packages --release --version-qualifier release-$BUILD_BUILDNUMBER
       displayName: 'Build distributable'
     
     - task: CopyFiles@2
