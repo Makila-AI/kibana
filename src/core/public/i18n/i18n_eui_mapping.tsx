@@ -1274,9 +1274,12 @@ export const getEuiContextMapping = (): EuiTokensObject => {
 export const getEuiContextMklMappingFuncProps = () => {
   return (propsName: string, propsValue?: ReactChild): ReactChild | undefined => {
     if (propsValue) {
-      const result = i18n.translate(`core.euiMakila.props.${propsName}.${propsValue}`, {
-        defaultMessage: propsValue.toString(),
-      });
+      const result = i18n.translate.apply(i18n, [
+        `core.euiMakila.props.${propsName}.${propsValue}`,
+        {
+          defaultMessage: propsValue.toString(),
+        },
+      ]);
       // if (!i18n.getLocale().startsWith('en') && result === propsValue.toString()) {
       // console.log(`core.euiMakila.props.${propsName}.${propsValue}`, result);
       // }
