@@ -30,6 +30,15 @@ export const getDefaultDecoration = (series) => {
       fill: Number(series.fill),
       lineWidth: Number(series.line_width),
       showValueLabel: Boolean(series.show_value_label),
+      valueLabelFontSize: {
+        min: series.value_label_font_min || 10,
+        max: series.value_label_font_max || 20,
+      },
+      valueLabelFill: {
+        color: series.value_label_fill_color || '#000',
+        borderColor: series.value_label_fill_bordercolor || '#FFF',
+        borderWidth: series.value_label_fill_borderwidth || 0.5,
+      },
     },
   };
 };
