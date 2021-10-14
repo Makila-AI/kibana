@@ -31,6 +31,7 @@ import { PalettePicker } from '../../palette_picker';
 import { getChartsSetup } from '../../../../services';
 import { isPercentDisabled } from '../../lib/stacked';
 import { STACKED_OPTIONS } from '../../../visualizations/constants/chart';
+import { ColorPicker } from '../../color_picker';
 
 export const TimeseriesConfig = injectI18n(function (props) {
   const handleSelectChange = createSelectHandler(props.onChange);
@@ -139,6 +140,7 @@ export const TimeseriesConfig = injectI18n(function (props) {
   };
 
   let type;
+  let valueLabel = <></>;
 
   if (model.chart_type === 'line') {
     type = (
@@ -316,12 +318,125 @@ export const TimeseriesConfig = injectI18n(function (props) {
             />
           </EuiFormRow>
         </EuiFlexItem>
-        <EuiFlexItem grow={false}>
-          <EuiFormLabel>Show value label</EuiFormLabel>
-          <EuiSpacer size="s" />
-          <YesNo value={model.show_value_label} name="show_value_label" onChange={props.onChange} />
-        </EuiFlexItem>
       </EuiFlexGroup>
+    );
+
+    valueLabel = (
+      <>
+        <EuiHorizontalRule margin="s" />
+        <EuiFlexGroup gutterSize="s" responsive={false} wrap={true}>
+          <EuiFlexItem grow={false}>
+            <EuiFormRow
+              id={htmlId('value_label_show')}
+              label={
+                <FormattedMessage
+                  id="visTypeTimeseries.timeSeries.chartBar.showValueLabel"
+                  defaultMessage="Show value label"
+                />
+              }
+            >
+              <YesNo
+                value={model.show_value_label}
+                name="show_value_label"
+                onChange={props.onChange}
+              />
+            </EuiFormRow>
+          </EuiFlexItem>
+          <EuiFlexItem grow={false}>
+            <EuiFormRow
+              id={htmlId('value_label_font_min')}
+              label={
+                <FormattedMessage
+                  id="visTypeTimeseries.timeSeries.chartBar.valueLabelFontSizeMin"
+                  defaultMessage="Font size min"
+                />
+              }
+            >
+              <EuiFieldNumber
+                step={1}
+                onChange={handleTextChange('value_label_font_min')}
+                value={Number(model.value_label_font_min || 10)}
+                min={1}
+                disabled={!model.show_value_label}
+              />
+            </EuiFormRow>
+          </EuiFlexItem>
+          <EuiFlexItem grow={false}>
+            <EuiFormRow
+              id={htmlId('value_label_font_max')}
+              label={
+                <FormattedMessage
+                  id="visTypeTimeseries.timeSeries.chartBar.valueLabelFontSizeMax"
+                  defaultMessage="Font size max"
+                />
+              }
+            >
+              <EuiFieldNumber
+                step={1}
+                onChange={handleTextChange('value_label_font_max')}
+                value={Number(model.value_label_font_max || 20)}
+                min={10}
+                disabled={!model.show_value_label}
+              />
+            </EuiFormRow>
+          </EuiFlexItem>
+          <EuiFlexItem grow={false}>
+            <EuiFormRow
+              id={htmlId('value_label_fill_color')}
+              label={
+                <FormattedMessage
+                  id="visTypeTimeseries.timeSeries.chartBar.valueLabelFillColor"
+                  defaultMessage="Fill color"
+                />
+              }
+            >
+              <ColorPicker
+                disableTrash={true}
+                onChange={props.onChange}
+                name="value_label_fill_color"
+                value={model.value_label_fill_color || '#000'}
+              />
+            </EuiFormRow>
+          </EuiFlexItem>
+          <EuiFlexItem grow={false}>
+            <EuiFormRow
+              id={htmlId('value_label_fill_bordercolor')}
+              label={
+                <FormattedMessage
+                  id="visTypeTimeseries.timeSeries.chartBar.valueLabelBorderColor"
+                  defaultMessage="Border color"
+                />
+              }
+            >
+              <ColorPicker
+                disableTrash={true}
+                onChange={props.onChange}
+                name="value_label_fill_bordercolor"
+                value={model.value_label_fill_bordercolor || '#FFF'}
+              />
+            </EuiFormRow>
+          </EuiFlexItem>
+          <EuiFlexItem grow={false}>
+            <EuiFormRow
+              id={htmlId('value_label_fill_borderwidth')}
+              label={
+                <FormattedMessage
+                  id="visTypeTimeseries.timeSeries.chartBar.valueLabelBorderWidth"
+                  defaultMessage="Border width"
+                />
+              }
+            >
+              <EuiFieldNumber
+                step={0.5}
+                onChange={handleTextChange('value_label_fill_borderwidth')}
+                value={Number(model.value_label_fill_borderwidth || 0.5)}
+                min={0}
+                disabled={!model.show_value_label}
+              />
+            </EuiFormRow>
+          </EuiFlexItem>
+        </EuiFlexGroup>
+      </>
     );
   }
 
@@ -390,6 +505,7 @@ export const TimeseriesConfig = injectI18n(function (props) {
       <EuiHorizontalRule margin="s" />
 
       {type}
+      {valueLabel}
 
       <EuiHorizontalRule margin="s" />
 

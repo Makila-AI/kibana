@@ -140,6 +140,8 @@ export const TimeSeries = ({
     [palettesService, series, syncColors]
   );
 
+  const firstBar = series.find((o) => o.bars?.show)?.bars;
+
   return (
     <Chart ref={chartRef} renderer="canvas" className={classes}>
       <Settings
@@ -153,19 +155,18 @@ export const TimeSeries = ({
         theme={[
           hasBarChart
             ? {
-                // barSeriesStyle: { A DECOMMENTER POUR charts >= v24
-                //   displayValue: {
-                //     fontSize: {
-                //       min: 10,
-                //       max: 25
-                //     },
-                //     fill: "#000",
-                //     alignment: {
-                //       horizontal: "center",
-                //       vertical: "middle"
-                //     }
-                //   }
-                // }
+                barSeriesStyle: {
+                  displayValue: {
+                    fontSize: firstBar?.valueLabelFontSize,
+                    fill: firstBar?.valueLabelFill,
+                    alignment: {
+                      horizontal: 'center',
+                      vertical: 'middle',
+                    },
+                    offsetX: 0,
+                    offsetY: 0,
+                  },
+                },
               }
             : {
                 crosshair: {
