@@ -1596,10 +1596,10 @@
   resolved "https://registry.yarnpkg.com/@elastic/eslint-plugin-eui/-/eslint-plugin-eui-0.0.2.tgz#56b9ef03984a05cc213772ae3713ea8ef47b0314"
   integrity sha512-IoxURM5zraoQ7C8f+mJb9HYSENiZGgRVcG4tLQxE61yHNNRDXtGDWTZh8N1KIHcsqN1CEPETjuzBXkJYF/fDiQ==
 
-"@elastic/eui@34.5.3-makila.0.1":
-  version "34.5.3-makila.0.1"
-  resolved "https://pkgs.dev.azure.com/makilaservices/_packaging/experimental/npm/registry/@elastic/eui/-/eui-34.5.3-makila.0.1.tgz#f9530d6d5ea157faa01ee0bf5574db2ff77ae7cb"
-  integrity sha1-+VMNbV6hV/qgHuC/VXTbL/d658s=
+"@elastic/eui@34.5.3-makila.0.2":
+  version "34.5.3-makila.0.2"
+  resolved "https://pkgs.dev.azure.com/makilaservices/_packaging/experimental/npm/registry/@elastic/eui/-/eui-34.5.3-makila.0.2.tgz#f5425fd7921ff022d0c521a7994b43b92642c64c"
+  integrity sha1-9UJf15If8CLQxSGnmUtDuSZCxkw=
   dependencies:
     "@types/chroma-js" "^2.0.0"
     "@types/lodash" "^4.14.160"
