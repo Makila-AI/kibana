@@ -6,6 +6,8 @@
  * Side Public License, v 1.
  */
 
+/* eslint-disable @typescript-eslint/naming-convention */
+
 import React, { ReactChild } from 'react';
 import { i18n } from '@kbn/i18n';
 import { FormattedMessage } from '@kbn/i18n/react';
@@ -1337,4 +1339,148 @@ export const getPropsLoc = () => {
     locale: i18n.getLocale(),
   };
   return propsLoc;
+};
+
+export const dynaMakilavars = () => {
+  // liste des vars uniquement present pour le generateur de fichiers de traduction
+  return {
+    timeRelative_Seconds_ago: i18n.translate('core.euiMakila.props.timeRelative.Seconds_ago', {
+      defaultMessage: 'Seconds ago',
+    }) as any,
+    timeRelative_Minutes_ago: i18n.translate('core.euiMakila.props.timeRelative.Minutes_ago', {
+      defaultMessage: 'Minutes ago',
+    }) as any,
+    timeRelative_Hours_ago: i18n.translate('core.euiMakila.props.timeRelative.Hours_ago', {
+      defaultMessage: 'Hours ago',
+    }) as any,
+    timeRelative_Days_ago: i18n.translate('core.euiMakila.props.timeRelative.Days_ago', {
+      defaultMessage: 'Days ago',
+    }) as any,
+    timeRelative_Weeks_ago: i18n.translate('core.euiMakila.props.timeRelative.Weeks_ago', {
+      defaultMessage: 'Weeks ago',
+    }) as any,
+    timeRelative_Months_ago: i18n.translate('core.euiMakila.props.timeRelative.Months_ago', {
+      defaultMessage: 'Months ago',
+    }) as any,
+    timeRelative_Years_ago: i18n.translate('core.euiMakila.props.timeRelative.Years_ago', {
+      defaultMessage: 'Years ago',
+    }) as any,
+    timeRelative_Second_from_now: i18n.translate(
+      'core.euiMakila.props.timeRelative.Second_from_now',
+      { defaultMessage: 'Second from now' }
+    ) as any,
+    timeRelative_Minutes_from_now: i18n.translate(
+      'core.euiMakila.props.timeRelative.Minutes_from_now',
+      { defaultMessage: 'Minutes from now' }
+    ) as any,
+    timeRelative_Hours_from_now: i18n.translate(
+      'core.euiMakila.props.timeRelative.Hours_from_now',
+      { defaultMessage: 'Hours from now' }
+    ) as any,
+    timeRelative_Days_from_now: i18n.translate('core.euiMakila.props.timeRelative.Days_from_now', {
+      defaultMessage: 'Days from now',
+    }) as any,
+    timeRelative_Weeks_from_now: i18n.translate(
+      'core.euiMakila.props.timeRelative.Weeks_from_now',
+      { defaultMessage: 'Weeks from now' }
+    ) as any,
+    timeRelative_Months_from_now: i18n.translate(
+      'core.euiMakila.props.timeRelative.Months_from_now',
+      { defaultMessage: 'Months from now' }
+    ) as any,
+    timeRelative_Years_from_now: i18n.translate(
+      'core.euiMakila.props.timeRelative.Years_from_now',
+      { defaultMessage: 'Years from now' }
+    ) as any,
+    timeTense_last: i18n.translate('core.euiMakila.props.timeTense.last', {
+      defaultMessage: 'last',
+    }) as any,
+    timeTense_next: i18n.translate('core.euiMakila.props.timeTense.next', {
+      defaultMessage: 'next',
+    }) as any,
+    position_Start: i18n.translate('core.euiMakila.props.position.Start', {
+      defaultMessage: 'Start',
+    }) as any,
+    position_start: i18n.translate('core.euiMakila.props.position.start', {
+      defaultMessage: 'start',
+    }) as any,
+    position_End: i18n.translate('core.euiMakila.props.position.End', {
+      defaultMessage: 'End',
+    }) as any,
+    position_end: i18n.translate('core.euiMakila.props.position.end', {
+      defaultMessage: 'end',
+    }) as any,
+    timeUnit_hour: i18n.translate('core.euiMakila.props.timeUnit.hour', {
+      defaultMessage: 'hour',
+    }) as any,
+    timeUnit_hours: i18n.translate('core.euiMakila.props.timeUnit.hours', {
+      defaultMessage: 'hours',
+    }) as any,
+    timeUnit_minute: i18n.translate('core.euiMakila.props.timeUnit.minute', {
+      defaultMessage: 'minute',
+    }) as any,
+    timeUnit_minutes: i18n.translate('core.euiMakila.props.timeUnit.minutes', {
+      defaultMessage: 'minutes',
+    }) as any,
+    timeUnit_second: i18n.translate('core.euiMakila.props.timeUnit.second', {
+      defaultMessage: 'second',
+    }) as any,
+    timeUnit_seconds: i18n.translate('core.euiMakila.props.timeUnit.seconds', {
+      defaultMessage: 'seconds',
+    }) as any,
+    timeUnit_day: i18n.translate('core.euiMakila.props.timeUnit.day', {
+      defaultMessage: 'day',
+    }) as any,
+    timeUnit_days: i18n.translate('core.euiMakila.props.timeUnit.days', {
+      defaultMessage: 'days',
+    }) as any,
+    timeUnit_week: i18n.translate('core.euiMakila.props.timeUnit.week', {
+      defaultMessage: 'week',
+    }) as any,
+    timeUnit_weeks: i18n.translate('core.euiMakila.props.timeUnit.weeks', {
+      defaultMessage: 'weeks',
+    }) as any,
+    timeUnit_month: i18n.translate('core.euiMakila.props.timeUnit.month', {
+      defaultMessage: 'month',
+    }) as any,
+    timeUnit_months: i18n.translate('core.euiMakila.props.timeUnit.months', {
+      defaultMessage: 'months',
+    }) as any,
+    timeUnit_year: i18n.translate('core.euiMakila.props.timeUnit.year', {
+      defaultMessage: 'year',
+    }) as any,
+    timeUnit_years: i18n.translate('core.euiMakila.props.timeUnit.years', {
+      defaultMessage: 'years',
+    }) as any,
+    timeRange_Today: i18n.translate('core.euiMakila.props.timeRange.Today', {
+      defaultMessage: 'Today',
+    }) as any,
+    timeRange_This_week: i18n.translate('core.euiMakila.props.timeRange.This_week', {
+      defaultMessage: 'This week',
+    }) as any,
+    timeRange_This_month: i18n.translate('core.euiMakila.props.timeRange.This_month', {
+      defaultMessage: 'This month',
+    }) as any,
+    timeRange_This_year: i18n.translate('core.euiMakila.props.timeRange.This_year', {
+      defaultMessage: 'This year',
+    }) as any,
+    timeRange_Yesterday: i18n.translate('core.euiMakila.props.timeRange.Yesterday', {
+      defaultMessage: 'Yesterday',
+    }) as any,
+    timeRange_Week_to_date: i18n.translate('core.euiMakila.props.timeRange.Week_to_date', {
+      defaultMessage: 'Week to date',
+    }) as any,
+    timeRange_Month_to_date: i18n.translate('core.euiMakila.props.timeRange.Month_to_date', {
+      defaultMessage: 'Month to date',
+    }) as any,
+    timeRange_Year_to_date: i18n.translate('core.euiMakila.props.timeRange.Year_to_date', {
+      defaultMessage: 'Year to date',
+    }) as any,
+    optionText_seconds: i18n.translate('core.euiMakila.props.optionText.seconds', {
+      defaultMessage: 'seconds',
+    }) as any,
+    optionText_hours: i18n.translate('core.euiMakila.props.optionText.hours', {
+      defaultMessage: 'hours',
+    }) as any,
+  };
 };
