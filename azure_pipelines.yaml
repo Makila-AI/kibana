@@ -50,6 +50,10 @@ stages:
         path: '$(Build.SourcesDirectory)' 
     
     - script: |
+        USE_BAZEL_VERSION=`cat .bazelversion` npm install --global @bazel/bazelisk@`cat .bazeliskversion`
+      displayName: 'Install Bazel tools'
+
+    - script: |
         yarn kbn bootstrap
       displayName: 'Bootstrap Kibana'
     
