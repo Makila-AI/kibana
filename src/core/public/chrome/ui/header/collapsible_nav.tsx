@@ -193,7 +193,7 @@ export function CollapsibleNav({
             })}
             listItems={[
               {
-                label: 'Home',
+                label: i18n.translate('home.breadcrumbs.homeTitle', { defaultMessage: 'Home' }),
                 iconType: 'home',
                 href: homeHref,
                 'data-test-subj': 'homeLink',
