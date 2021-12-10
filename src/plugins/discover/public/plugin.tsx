@@ -332,7 +332,9 @@ export class DiscoverPlugin
 
     core.application.register({
       id: 'discover',
-      title: 'Discover',
+      title: i18n.translate('discover.discoverTitle', {
+        defaultMessage: 'Discover',
+      }),
       updater$: this.appStateUpdater.asObservable(),
       order: 1000,
       euiIconType: 'logoKibana',
