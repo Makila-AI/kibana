@@ -10,6 +10,7 @@ import { isString, isObject as isObjectLodash, isPlainObject, sortBy } from 'lod
 import moment, { Moment } from 'moment';
 
 import { Unit } from '@elastic/datemath';
+import { getEuiContextMklMappingFuncProps } from '../../../../../../../../core/public/utils';
 import { parseInterval, splitStringInterval } from '../../../utils';
 import { TimeRangeBounds } from '../../../../../query';
 import { calcAutoIntervalLessThan, calcAutoIntervalNear } from './calc_auto_interval';
@@ -257,6 +258,8 @@ export class TimeBuckets {
       });
     };
 
+    const mklMappingFuncProps = getEuiContextMklMappingFuncProps();
+
     // append some TimeBuckets specific props to the interval
     const decorateInterval = (
       interval: Assign<moment.Duration, { scaled?: boolean }>
@@ -274,9 +277,19 @@ export class TimeBuckets {
 
       const prettyUnits = moment.normalizeUnits(esInterval.unit);
 
+      const descriptionCode =
+        esInterval.value === 1 ? prettyUnits : esInterval.value + ' ' + prettyUnits + 's';
+      let description = '';
+      try {
+        description = (
+          mklMappingFuncProps('timeUnit', descriptionCode) || descriptionCode
+        ).toString();
+      } catch (err) {
+        description = descriptionCode;
+      }
+
       return Object.assign(interval, {
-        description:
-          esInterval.value === 1 ? prettyUnits : esInterval.value + ' ' + prettyUnits + 's',
+        description,
         esValue: esInterval.value,
         esUnit: esInterval.unit,
         expression: esInterval.expression,
