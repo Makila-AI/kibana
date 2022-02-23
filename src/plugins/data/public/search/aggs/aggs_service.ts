@@ -8,7 +8,7 @@
 
 import { Subscription } from 'rxjs';
 
-import { IUiSettingsClient } from 'src/core/public';
+import { I18nStart, IUiSettingsClient } from 'src/core/public';
 import { ExpressionsServiceSetup } from 'src/plugins/expressions/common';
 import { FieldFormatsStart } from '../../../../field_formats/public';
 import { calculateBounds, TimeRange } from '../../../common';
@@ -60,6 +60,7 @@ export interface AggsStartDependencies {
   fieldFormats: FieldFormatsStart;
   uiSettings: IUiSettingsClient;
   indexPatterns: IndexPatternsContract;
+  i18n?: I18nStart;
 }
 
 /**
@@ -88,7 +89,12 @@ export class AggsService {
     return this.aggsCommonService.setup({ registerFunction });
   }
 
-  public start({ fieldFormats, uiSettings, indexPatterns }: AggsStartDependencies): AggsStart {
+  public start({
+    fieldFormats,
+    uiSettings,
+    indexPatterns,
+    i18n,
+  }: AggsStartDependencies): AggsStart {
     const isDefaultTimezone = () => uiSettings.isDefault('dateFormat:tz');
 
     const { calculateAutoTimeExpression, datatableUtilities, types } = this.aggsCommonService.start(
@@ -107,6 +113,7 @@ export class AggsService {
         getDefaultInstance: fieldFormats.getDefaultInstance,
       }),
       isDefaultTimezone,
+      makilaTranslateTimeLabels: i18n?.MakilaTranslateTimeLabels,
     };
 
     // initialize each agg type and store in memory

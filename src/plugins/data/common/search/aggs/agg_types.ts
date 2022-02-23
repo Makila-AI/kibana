@@ -6,6 +6,7 @@
  * Side Public License, v 1.
  */
 
+import { I18nStart } from 'kibana/public';
 import { FieldFormatsStartCommon } from '../../../../field_formats/common';
 
 import * as buckets from './buckets';
@@ -20,6 +21,7 @@ export interface AggTypesDependencies {
   getConfig: <T = any>(key: string) => T;
   getFieldFormatsStart: () => Pick<FieldFormatsStartCommon, 'deserialize' | 'getDefaultInstance'>;
   isDefaultTimezone: () => boolean;
+  makilaTranslateTimeLabels?: I18nStart['MakilaTranslateTimeLabels'];
 }
 
 /** @internal */
