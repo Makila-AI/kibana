@@ -153,7 +153,7 @@ export class SearchService implements Plugin<ISearchSetup, ISearchStart> {
   }
 
   public start(
-    { http, uiSettings }: CoreStart,
+    { http, uiSettings, i18n }: CoreStart,
     { fieldFormats, indexPatterns }: SearchServiceStartDependencies
   ): ISearchStart {
     const search = ((request, options = {}) => {
@@ -170,7 +170,7 @@ export class SearchService implements Plugin<ISearchSetup, ISearchStart> {
     };
 
     return {
-      aggs: this.aggsService.start({ fieldFormats, uiSettings, indexPatterns }),
+      aggs: this.aggsService.start({ fieldFormats, uiSettings, indexPatterns, i18n }),
       search,
       showError: (e: Error) => {
         this.searchInterceptor.showError(e);
