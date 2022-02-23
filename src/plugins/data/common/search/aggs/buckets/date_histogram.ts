@@ -10,6 +10,7 @@ import { get, noop, find, every } from 'lodash';
 import moment from 'moment-timezone';
 import { i18n } from '@kbn/i18n';
 
+import { I18nStart } from 'kibana/public';
 import { KBN_FIELD_TYPES, TimeRange, TimeRangeBounds, UI_SETTINGS } from '../../../../common';
 import { IFieldType } from '../../..';
 
@@ -48,6 +49,7 @@ export interface DateHistogramBucketAggDependencies {
   calculateBounds: CalculateBoundsFn;
   isDefaultTimezone: () => boolean;
   getConfig: <T = any>(key: string) => T;
+  makilaTranslateTimeLabels?: I18nStart['MakilaTranslateTimeLabels'];
 }
 
 export interface IBucketDateHistogramAggConfig extends IBucketAggConfig {
@@ -77,6 +79,7 @@ export const getDateHistogramBucketAgg = ({
   calculateBounds,
   isDefaultTimezone,
   getConfig,
+  makilaTranslateTimeLabels,
 }: DateHistogramBucketAggDependencies) =>
   new BucketAggType<IBucketDateHistogramAggConfig>({
     name: BUCKET_TYPES.DATE_HISTOGRAM,
@@ -114,12 +117,15 @@ export const getDateHistogramBucketAgg = ({
           get() {
             if (buckets) return buckets;
 
-            buckets = new TimeBuckets({
-              'histogram:maxBars': getConfig(UI_SETTINGS.HISTOGRAM_MAX_BARS),
-              'histogram:barTarget': getConfig(UI_SETTINGS.HISTOGRAM_BAR_TARGET),
-              dateFormat: getConfig('dateFormat'),
-              'dateFormat:scaled': getConfig('dateFormat:scaled'),
-            });
+            buckets = new TimeBuckets(
+              {
+                'histogram:maxBars': getConfig(UI_SETTINGS.HISTOGRAM_MAX_BARS),
+                'histogram:barTarget': getConfig(UI_SETTINGS.HISTOGRAM_BAR_TARGET),
+                dateFormat: getConfig('dateFormat'),
+                'dateFormat:scaled': getConfig('dateFormat:scaled'),
+              },
+              makilaTranslateTimeLabels
+            );
             updateTimeBuckets(this, calculateBounds, buckets);
 
             return buckets;

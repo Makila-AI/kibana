@@ -10,7 +10,7 @@ import { isString, isObject as isObjectLodash, isPlainObject, sortBy } from 'lod
 import moment, { Moment } from 'moment';
 
 import { Unit } from '@elastic/datemath';
-import { getEuiContextMklMappingFuncProps } from '../../../../../../../../core/public/utils';
+import { I18nStart } from 'kibana/public';
 import { parseInterval, splitStringInterval } from '../../../utils';
 import { TimeRangeBounds } from '../../../../../query';
 import { calcAutoIntervalLessThan, calcAutoIntervalNear } from './calc_auto_interval';
@@ -68,7 +68,10 @@ export class TimeBuckets {
   // because other parts of Kibana arbitrarily add properties
   [key: string]: any;
 
-  constructor(timeBucketConfig: TimeBucketsConfig) {
+  constructor(
+    timeBucketConfig: TimeBucketsConfig,
+    private makilaTranslateTimeLabels?: I18nStart['MakilaTranslateTimeLabels']
+  ) {
     this._timeBucketConfig = timeBucketConfig;
   }
 
@@ -258,8 +261,6 @@ export class TimeBuckets {
       });
     };
 
-    const mklMappingFuncProps = getEuiContextMklMappingFuncProps();
-
     // append some TimeBuckets specific props to the interval
     const decorateInterval = (
       interval: Assign<moment.Duration, { scaled?: boolean }>
@@ -277,19 +278,23 @@ export class TimeBuckets {
 
       const prettyUnits = moment.normalizeUnits(esInterval.unit);
 
-      const descriptionCode =
-        esInterval.value === 1 ? prettyUnits : esInterval.value + ' ' + prettyUnits + 's';
-      let description = '';
-      try {
-        description = (
-          mklMappingFuncProps('timeUnit', descriptionCode) || descriptionCode
-        ).toString();
-      } catch (err) {
-        description = descriptionCode;
+      const descriptionCode = esInterval.value === 1 ? prettyUnits : `${prettyUnits}s`;
+      const description: string[] = [];
+      if (esInterval.value !== 1) {
+        description.push(esInterval.value.toString());
+      }
+      if (this.makilaTranslateTimeLabels) {
+        try {
+          description.push(this.makilaTranslateTimeLabels('timeUnit', descriptionCode));
+        } catch (err) {
+          description.push(descriptionCode);
+        }
+      } else {
+        description.push(descriptionCode);
       }
 
       return Object.assign(interval, {
-        description,
+        description: description.join(' '),
         esValue: esInterval.value,
         esUnit: esInterval.unit,
         expression: esInterval.expression,

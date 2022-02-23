@@ -49,6 +49,9 @@ export class I18nService {
           </I18nProvider>
         );
       },
+      MakilaTranslateTimeLabels: (type, code) => {
+        return (mklMappingFuncProps(type, code) || code).toString();
+      },
     };
   }
 
@@ -73,4 +76,8 @@ export interface I18nStart {
    * React Context provider required as the topmost component for any i18n-compatible React tree.
    */
   Context: ({ children }: { children: React.ReactNode }) => JSX.Element;
+  MakilaTranslateTimeLabels: (
+    type: 'timeRelative' | 'timeTense' | 'timeRange' | 'timeUnit',
+    code: string
+  ) => string;
 }

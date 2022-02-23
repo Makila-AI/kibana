@@ -6,6 +6,5 @@
  * Side Public License, v 1.
  */
 
-export { getEuiContextMklMappingFuncProps } from '../i18n/i18n_eui_mapping';
 export { Sha256 } from './crypto';
 export { MountWrapper, mountReactNode } from './mount';

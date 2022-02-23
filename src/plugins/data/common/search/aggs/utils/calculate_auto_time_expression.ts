@@ -7,25 +7,32 @@
  */
 
 import moment from 'moment';
+import { I18nStart } from 'kibana/public';
 import { UI_SETTINGS } from '../../../../common/constants';
 import { TimeRange } from '../../../../common/query';
 import { TimeBuckets } from '../buckets/lib/time_buckets';
 import { toAbsoluteDates } from './date_interval_utils';
 import { autoInterval } from '../buckets/_interval_options';
 
-export function getCalculateAutoTimeExpression(getConfig: (key: string) => any) {
+export function getCalculateAutoTimeExpression(
+  getConfig: (key: string) => any,
+  makilaTranslateTimeLabels?: I18nStart['MakilaTranslateTimeLabels']
+) {
   return function calculateAutoTimeExpression(range: TimeRange) {
     const dates = toAbsoluteDates(range);
     if (!dates) {
       return;
     }
 
-    const buckets = new TimeBuckets({
-      'histogram:maxBars': getConfig(UI_SETTINGS.HISTOGRAM_MAX_BARS),
-      'histogram:barTarget': getConfig(UI_SETTINGS.HISTOGRAM_BAR_TARGET),
-      dateFormat: getConfig('dateFormat'),
-      'dateFormat:scaled': getConfig('dateFormat:scaled'),
-    });
+    const buckets = new TimeBuckets(
+      {
+        'histogram:maxBars': getConfig(UI_SETTINGS.HISTOGRAM_MAX_BARS),
+        'histogram:barTarget': getConfig(UI_SETTINGS.HISTOGRAM_BAR_TARGET),
+        dateFormat: getConfig('dateFormat'),
+        'dateFormat:scaled': getConfig('dateFormat:scaled'),
+      },
+      makilaTranslateTimeLabels
+    );
 
     buckets.setInterval(autoInterval);
     buckets.setBounds({

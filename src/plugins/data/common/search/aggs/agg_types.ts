@@ -7,6 +7,7 @@
  */
 
 import { FieldFormatsStartCommon } from '../../../../field_formats/common';
+import { I18nStart } from 'kibana/public';
 
 import * as buckets from './buckets';
 import * as metrics from './metrics';
@@ -20,6 +21,7 @@ export interface AggTypesDependencies {
   getConfig: <T = any>(key: string) => T;
   getFieldFormatsStart: () => Pick<FieldFormatsStartCommon, 'deserialize' | 'getDefaultInstance'>;
   isDefaultTimezone: () => boolean;
+  makilaTranslateTimeLabels?: I18nStart['MakilaTranslateTimeLabels'];
 }
 
 /** @internal */
