@@ -285,6 +285,15 @@ export class TelemetryPlugin implements Plugin<TelemetryPluginSetup, TelemetryPl
   }
 
   private async getTelemetrySavedObject(savedObjectsClient: SavedObjectsClientContract) {
+    // #region Makila
+    try {
+      if (window.location.pathname.indexOf('spaces/space_selector') > -1) {
+        return false;
+      }
+      // eslint-disable-next-line no-empty
+    } catch (err) {}
+    // #endregion
+
     try {
       // Use bulk get API here to avoid the queue. This could fail independent requests if we don't have rights to access the telemetry object otherwise
       const {
