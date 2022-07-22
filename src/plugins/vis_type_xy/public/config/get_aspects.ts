@@ -75,15 +75,24 @@ function getAspectsFromDimension(
 }
 
 const getAspect = (
-  { id: accessor, name: title }: DatatableColumn,
+  { id: accessor, name }: DatatableColumn,
   { accessor: column, format, params, aggType }: Dimension
-): Aspect => ({
-  accessor,
-  column,
-  title,
-  format,
-  aggType,
-  aggId: getAggId(accessor),
-  formatter: (value: any) => getFormatService().deserialize(format).convert(value),
-  params,
-});
+): Aspect => {
+  let title = name;
+  if (i18n.getLocale() === 'fr-fr') {
+    if (name === 'filters') {
+      title = 'Filtres';
+    }
+  }
+
+  return {
+    accessor,
+    column,
+    title,
+    format,
+    aggType,
+    aggId: getAggId(accessor),
+    formatter: (value: any) => getFormatService().deserialize(format).convert(value),
+    params,
+  };
+};
