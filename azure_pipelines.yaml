@@ -41,13 +41,15 @@ stages:
       inputs:
         workingFile: $(Build.SourcesDirectory)/.npmrc
 
-    #- task: DownloadPipelineArtifact@2
-    #  inputs:
-    #    source: 'specific'
-    #    project: 'c7f21416-8321-442c-8543-b51f1f7aa6da'
-    #    pipeline: 56
-    #    artifact: 'extra'
-    #    path: '$(Build.SourcesDirectory)' 
+    - task: DownloadPipelineArtifact@2
+      inputs:
+        source: 'specific'
+        project: 'c7f21416-8321-442c-8543-b51f1f7aa6da'
+        pipeline: 56
+        runVersion: 'latestFromBranch'
+        runBranch: 'refs/heads/migration-8.6'
+        artifact: 'extra'
+        path: '$(Build.SourcesDirectory)' 
     
     - script: |
         USE_BAZEL_VERSION=`cat .bazelversion` npm install --global @bazel/bazelisk@`cat .bazeliskversion`
