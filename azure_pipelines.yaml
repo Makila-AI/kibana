@@ -54,6 +54,10 @@ stages:
       displayName: 'Install Bazel tools'
 
     - script: |
+        npm install --global yarn
+      displayName: 'Install Yarn tools'
+
+    - script: |
         yarn kbn bootstrap
       displayName: 'Bootstrap Kibana'
     
