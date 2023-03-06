@@ -1,0 +1,77 @@
+# /*********************************************************************************
+# Role ........ : Pipeline Azure pour le déploiement de Kibana
+# Auteur ...... : Alexandre Delisle
+# 
+# © 2020 Service Makila Inc.
+# Service Makila Inc. retains all right, title and interest to
+# this software and all related intellectual property.  You may not reproduce,
+# copy, or redistribute this software without the express written permission of
+# Service Makila Inc.
+# 
+# © 2020 Service Makila Inc.
+# Service Makila Inc. conserve tous les droits, titres et intérêts
+# dans ce logiciel et dans toute propriété intellectuelle s'y rapportant.
+# Vous ne pouvez reproduire, copier ou redistribuer ce logiciel
+# sans l'autorisation écrite expresse de Service Makila Inc.
+# 
+# *********************************************************************************/
+
+trigger:
+  branches:
+    include:
+    - makila-v*
+
+stages:
+- stage: Build
+  displayName: Publish Kibana resources
+  jobs:
+  - job: Publish
+    displayName: Publish Kibana resources
+    pool: 'Makila Pool'
+    timeoutInMinutes: 300
+    steps:
+    - checkout: self
+
+    - task: NodeTool@0
+      inputs:
+        versionSpec: '16.18.1'
+      displayName: 'Install Node.js'
+
+    - task: npmAuthenticate@0
+      inputs:
+        workingFile: $(Build.SourcesDirectory)/.npmrc
+
+    #- task: DownloadPipelineArtifact@2
+    #  inputs:
+    #    source: 'specific'
+    #    project: 'c7f21416-8321-442c-8543-b51f1f7aa6da'
+    #    pipeline: 56
+    #    artifact: 'extra'
+    #    path: '$(Build.SourcesDirectory)' 
+    
+    - script: |
+        USE_BAZEL_VERSION=`cat .bazelversion` npm install --global @bazel/bazelisk@`cat .bazeliskversion`
+      displayName: 'Install Bazel tools'
+
+    - script: |
+        yarn kbn bootstrap
+      displayName: 'Bootstrap Kibana'
+    
+    - script: |
+        node scripts/build --skip-os-packages --release --version-qualifier release-$BUILD_BUILDNUMBER
+      displayName: 'Build distributable'
+    
+    - task: CopyFiles@2
+      inputs:
+        SourceFolder: '$(Build.SourcesDirectory)'
+        Contents: |
+          target/**
+        TargetFolder: '$(Build.ArtifactStagingDirectory)'
+        CleanTargetFolder: true
+      displayName: 'Prepare for release'
+
+    - task: PublishPipelineArtifact@1
+      inputs:
+        targetPath: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'distributable'
+      displayName: 'Release Kibana distributable'
