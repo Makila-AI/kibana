@@ -12,7 +12,7 @@
   ],
   "private": true,
   "version": "8.6.2",
-  "branch": "8.6",
+  "branch": "makila-v8.6.2",
   "types": "./kibana.d.ts",
   "tsdocMetadata": "./build/tsdoc-metadata.json",
   "build": {
@@ -65,7 +65,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/elastic/kibana.git"
+    "url": "https://github.com/makila-inc/kibana.git"
   },
   "engines": {
     "node": "16.18.1",
