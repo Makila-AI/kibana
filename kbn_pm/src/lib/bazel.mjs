@@ -212,11 +212,14 @@ export async function tryRemovingBazeliskFromYarnGlobal(log) {
 export async function isInstalled(log) {
   try {
     log.debug('getting bazel version');
-    const [stdout, bazelVersion] = await Promise.all([
+    const [, bazelVersion] = await Promise.all([
       run('bazel', ['--version']),
       readBazelToolsVersionFile('.bazelversion'),
     ]);
 
+    // because the previous run seems to capture a previous run's output???
+    const stdout = await run('bazel', ['--version']);
+    
     const installed = stdout.trim();
 
     if (installed === `bazel ${bazelVersion}`) {
