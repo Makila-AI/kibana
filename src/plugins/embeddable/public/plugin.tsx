@@ -142,6 +142,8 @@ export class EmbeddablePublicPlugin implements Plugin<EmbeddableSetup, Embeddabl
       );
     });
 
+    const I18nContext = core.i18n.Context;
+
     this.appListSubscription = core.application.applications$.subscribe((appList) => {
       this.appList = appList;
     });
@@ -160,19 +162,21 @@ export class EmbeddablePublicPlugin implements Plugin<EmbeddableSetup, Embeddabl
       embeddable: IEmbeddable;
       hideHeader?: boolean;
     }) => (
-      <EmbeddablePanel
-        hideHeader={hideHeader}
-        embeddable={embeddable}
-        stateTransfer={this.stateTransferService}
-        getActions={uiActions.getTriggerCompatibleActions}
-        getEmbeddableFactory={this.getEmbeddableFactory}
-        getAllEmbeddableFactories={this.getEmbeddableFactories}
-        overlays={core.overlays}
-        notifications={core.notifications}
-        application={core.application}
-        inspector={inspector}
-        SavedObjectFinder={getSavedObjectFinder(core.savedObjects, core.uiSettings)}
-      />
+      <I18nContext>
+        <EmbeddablePanel
+          hideHeader={hideHeader}
+          embeddable={embeddable}
+          stateTransfer={this.stateTransferService}
+          getActions={uiActions.getTriggerCompatibleActions}
+          getEmbeddableFactory={this.getEmbeddableFactory}
+          getAllEmbeddableFactories={this.getEmbeddableFactories}
+          overlays={core.overlays}
+          notifications={core.notifications}
+          application={core.application}
+          inspector={inspector}
+          SavedObjectFinder={getSavedObjectFinder(core.savedObjects, core.uiSettings)}
+        />
+      </I18nContext>
     );
 
     const commonContract = {
