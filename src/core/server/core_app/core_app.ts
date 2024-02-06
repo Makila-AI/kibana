@@ -100,13 +100,52 @@ export class CoreApp {
       });
     });
 
-    this.registerCommonDefaultRoutes({
-      basePath: coreSetup.http.basePath,
-      httpResources: resources,
-      router,
-      uiPlugins,
-      onResourceNotFound: async (req, res) => res.notFound(),
-    });
+    // remove trailing slash catch-all
+    router.get(
+      {
+        path: '/{path*}',
+        validate: {
+          params: schema.object({
+            path: schema.maybe(schema.string()),
+          }),
+          query: schema.maybe(schema.recordOf(schema.string(), schema.any())),
+        },
+      },
+      async (context, req, res) => {
+        const { query, params } = req;
+        const { path } = params;
+        if (!path || !path.endsWith('/') || path.startsWith('/')) {
+          return res.notFound();
+        }
+
+        const basePath = httpSetup.basePath.get(req);
+        let rewrittenPath = path.slice(0, -1);
+        if (`/${path}`.startsWith(basePath)) {
+          rewrittenPath = rewrittenPath.substring(basePath.length);
+        }
+
+        const querystring = query ? stringify(query) : undefined;
+        const url = `${basePath}/${encodeURIComponent(rewrittenPath)}${
+          querystring ? `?${querystring}` : ''
+        }`;
+
+        return res.redirected({
+          headers: {
+            location: url,
+          },
+        });
+      }
+    );
+
+    router.get({ path: '/core', validate: false }, async (context, req, res) =>
+      res.ok({ body: { version: '0.0.1' } })
+    );
+
+    // registerBundleRoutes({
+    //   router,
+    //   uiPlugins,
+    //   onResourceNotFound: async (req, res) => res.notFound(),
+    // });
 
     resources.register(
       {
