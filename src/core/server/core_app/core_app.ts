@@ -76,7 +76,9 @@ export class CoreApp {
         }
 
         const querystring = query ? stringify(query) : undefined;
-        const url = `${basePath}/${rewrittenPath}${querystring ? `?${querystring}` : ''}`;
+        const url = `${basePath}/${encodeURIComponent(rewrittenPath)}${
+          querystring ? `?${querystring}` : ''
+        }`;
 
         return res.redirected({
           headers: {
