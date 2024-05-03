@@ -11,8 +11,8 @@
     "dashboarding"
   ],
   "private": true,
-  "version": "7.17.21",
-  "branch": "makila-v7.17.21",
+  "version": "7.17.22",
+  "branch": "makila-v7.17.23",
   "types": "./kibana.d.ts",
   "tsdocMetadata": "./build/tsdoc-metadata.json",
   "build": {
