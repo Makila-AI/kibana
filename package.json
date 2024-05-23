@@ -12,7 +12,7 @@
   ],
   "private": true,
   "version": "7.17.21",
-  "branch": "makila-7.17.21",
+  "branch": "makila-v7.17.21",
   "types": "./kibana.d.ts",
   "tsdocMetadata": "./build/tsdoc-metadata.json",
   "build": {
