@@ -17,18 +17,13 @@ interface Props {
   breadcrumbs$: Observable<ChromeBreadcrumb[]>;
 }
 
-export function HeaderBreadcrumbs({ breadcrumbs$ }: Props) {
+export function HeaderBreadcrumbs({ breadcrumbs$ }: Readonly<Props>) {
   const breadcrumbs = useObservable(breadcrumbs$, []);
   let crumbs = breadcrumbs;
 
   if (breadcrumbs.length === 0) {
     crumbs = [{ text: 'Kibana' }];
-  // if (breadcrumbs.length === 0 && appTitle) {
-  //   crumbs = [{ text: appTitle }];
-  //   if (appTitle === 'Kibana') {
-  //     crumbs = [{ text: '' }];
-  //   }
-  // }
+  }
 
   crumbs = crumbs.map((breadcrumb, i) => ({
     ...breadcrumb,
