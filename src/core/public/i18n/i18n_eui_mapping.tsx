@@ -1183,6 +1183,25 @@ export const getEuiContextMapping = (): EuiTokensObject => {
         defaultMessage: 'You can quickly navigate this list using arrow keys.',
       }
     ),
+    'euiNotificationEventReadIcon.read': i18n.translate('core.euiNotificationEventReadIcon.read', {
+      defaultMessage: 'Read',
+    }),
+    'euiNotificationEventReadIcon.readAria': ({ eventName }: EuiValues) =>
+      i18n.translate('core.euiNotificationEventReadIcon.readAria', {
+        defaultMessage: '{eventName} is read',
+        values: { eventName },
+      }),
+    'euiNotificationEventReadIcon.unread': i18n.translate(
+      'core.euiNotificationEventReadIcon.unread',
+      {
+        defaultMessage: 'Unread',
+      }
+    ),
+    'euiNotificationEventReadIcon.unreadAria': ({ eventName }: EuiValues) =>
+      i18n.translate('core.euiNotificationEventReadIcon.unreadAria', {
+        defaultMessage: '{eventName} is unread',
+        values: { eventName },
+      }),
     'euiMakila.datePicker.euiDatePopoverContent.now.infos': i18n.translate(
       'core.euiMakila.datePicker.euiDatePopoverContent.now.infos',
       {
