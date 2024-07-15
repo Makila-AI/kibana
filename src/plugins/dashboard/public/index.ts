@@ -8,6 +8,7 @@
 
 import { PluginInitializerContext } from '../../../core/public';
 import { DashboardPlugin } from './plugin';
+import { loadSavedDashboardState } from './application/lib';
 
 export {
   DashboardContainer,
@@ -32,3 +33,4 @@ export type { SavedDashboardPanel, DashboardContainerInput } from './types';
 export function plugin(initializerContext: PluginInitializerContext) {
   return new DashboardPlugin(initializerContext);
 }
+export { loadSavedDashboardState };
