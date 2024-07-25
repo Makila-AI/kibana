@@ -17,6 +17,7 @@ const createStartContractMock = () => {
   const setupContract: jest.Mocked<I18nStart> = {
     // By default mock the Context component so it simply renders all children
     Context: jest.fn().mockImplementation(PassThroughComponent),
+    MakilaTranslateTimeLabels: jest.fn().mockImplementation(PassThroughComponent),
   };
   return setupContract;
 };

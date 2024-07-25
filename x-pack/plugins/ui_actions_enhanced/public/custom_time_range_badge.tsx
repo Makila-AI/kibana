@@ -38,7 +38,7 @@ export class CustomTimeRangeBadge implements Action<TimeBadgeActionContext> {
   private openModal: OpenModal;
   private dateFormat: string;
   private commonlyUsedRanges: CommonlyUsedRange[];
-  private i18nStart: CoreStart['i18n'];
+  private i18nStart: CoreStart['i18n'] | undefined;
 
   constructor({
     openModal,
@@ -49,7 +49,7 @@ export class CustomTimeRangeBadge implements Action<TimeBadgeActionContext> {
     openModal: OpenModal;
     dateFormat: string;
     commonlyUsedRanges: CommonlyUsedRange[];
-    i18nStart: CoreStart['i18n'];
+    i18nStart?: CoreStart['i18n'];
   }) {
     this.openModal = openModal;
     this.dateFormat = dateFormat;
@@ -86,19 +86,31 @@ export class CustomTimeRangeBadge implements Action<TimeBadgeActionContext> {
       const CustomizeTimeRangeModal = await import('./customize_time_range_modal').then(
         (m) => m.CustomizeTimeRangeModal
       );
-      const modalSession = this.openModal(
-        <this.i18nStart.Context>
-          <CustomizeTimeRangeModal
-            onClose={() => modalSession.close()}
-            embeddable={embeddable}
-            dateFormat={this.dateFormat}
-            commonlyUsedRanges={this.commonlyUsedRanges}
-          />
-        </this.i18nStart.Context>,
-        {
-          'data-test-subj': 'customizeTimeRangeModal',
-        }
-      );
+      const modalSession = this.i18nStart
+        ? this.openModal(
+            <this.i18nStart.Context>
+              <CustomizeTimeRangeModal
+                onClose={() => modalSession.close()}
+                embeddable={embeddable}
+                dateFormat={this.dateFormat}
+                commonlyUsedRanges={this.commonlyUsedRanges}
+              />
+            </this.i18nStart.Context>,
+            {
+              'data-test-subj': 'customizeTimeRangeModal',
+            }
+          )
+        : this.openModal(
+            <CustomizeTimeRangeModal
+              onClose={() => modalSession.close()}
+              embeddable={embeddable}
+              dateFormat={this.dateFormat}
+              commonlyUsedRanges={this.commonlyUsedRanges}
+            />,
+            {
+              'data-test-subj': 'customizeTimeRangeModal',
+            }
+          );
     }
   }
 }

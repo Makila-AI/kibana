@@ -59,6 +59,9 @@ export const StorybookContext: React.FC<{ storyContext?: Parameters<DecoratorFn>
       Context: function I18nContext({ children }) {
         return <I18nProvider>{children}</I18nProvider>;
       },
+      MakilaTranslateTimeLabels(type, code) {
+        return '';
+      },
     },
     injectedMetadata: {
       getInjectedVar: () => null,
