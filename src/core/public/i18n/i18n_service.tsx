@@ -40,8 +40,7 @@ export class I18nService {
             <EuiContext
               i18n={{
                 mapping,
-                locale: i18n.getLocale(),
-                mklMappingFuncProps,
+                locale: i18n.getLocale(), // mklMappingFuncProps,
               }}
             >
               {children}
