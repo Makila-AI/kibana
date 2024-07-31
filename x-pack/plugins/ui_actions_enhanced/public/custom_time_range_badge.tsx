@@ -13,7 +13,7 @@ import { Action, IncompatibleActionError } from '../../../../src/plugins/ui_acti
 import { TimeRange } from '../../../../src/plugins/data/public';
 import { doesInheritTimeRange } from './does_inherit_time_range';
 import { OpenModal, CommonlyUsedRange } from './types';
-// import { getPropsLoc } from '../../../../src/core/public';
+import { getPropsLoc } from '../../../../src/core/public';
 
 export const CUSTOM_TIME_RANGE_BADGE = 'CUSTOM_TIME_RANGE_BADGE';
 
@@ -62,7 +62,8 @@ export class CustomTimeRangeBadge implements Action<TimeBadgeActionContext> {
       embeddable.getInput().timeRange.from,
       embeddable.getInput().timeRange.to,
       commonDurationRanges,
-      this.dateFormat // , getPropsLoc()
+      this.dateFormat,
+      getPropsLoc()
     );
   }
 
