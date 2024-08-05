@@ -1,19 +1,19 @@
 # /*********************************************************************************
 # Role ........ : Pipeline Azure pour le déploiement de Kibana
 # Auteur ...... : Alexandre Delisle
-# 
+#
 # © 2020 Service Makila Inc.
 # Service Makila Inc. retains all right, title and interest to
 # this software and all related intellectual property.  You may not reproduce,
 # copy, or redistribute this software without the express written permission of
 # Service Makila Inc.
-# 
+#
 # © 2020 Service Makila Inc.
 # Service Makila Inc. conserve tous les droits, titres et intérêts
 # dans ce logiciel et dans toute propriété intellectuelle s'y rapportant.
 # Vous ne pouvez reproduire, copier ou redistribuer ce logiciel
 # sans l'autorisation écrite expresse de Service Makila Inc.
-# 
+#
 # *********************************************************************************/
 
 trigger:
@@ -34,7 +34,8 @@ stages:
 
     - task: NodeTool@0
       inputs:
-        versionSpec: '20.12.2'
+        versionSource: "fromFile"
+        versionFilePath: "$(Build.SourcesDirectory)/.nvmrc"
       displayName: 'Install Node.js'
 
     - task: npmAuthenticate@0
@@ -47,8 +48,8 @@ stages:
         project: 'c7f21416-8321-442c-8543-b51f1f7aa6da'
         pipeline: 56
         artifact: 'extra'
-        path: '$(Build.SourcesDirectory)' 
-    
+        path: '$(Build.SourcesDirectory)'
+
     - script: |
         USE_BAZEL_VERSION=`cat .bazelversion` npm install --global @bazel/bazelisk@`cat .bazeliskversion`
       displayName: 'Install Bazel tools'
@@ -56,11 +57,11 @@ stages:
     - script: |
         yarn kbn bootstrap
       displayName: 'Bootstrap Kibana'
-    
+
     - script: |
         node scripts/build --skip-os-packages --release --version-qualifier release-$BUILD_BUILDNUMBER
       displayName: 'Build distributable'
-    
+
     - task: CopyFiles@2
       inputs:
         SourceFolder: '$(Build.SourcesDirectory)'
