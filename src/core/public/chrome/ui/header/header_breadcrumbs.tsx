@@ -22,7 +22,7 @@ export function HeaderBreadcrumbs({ breadcrumbs$ }: Readonly<Props>) {
   let crumbs = breadcrumbs;
 
   if (breadcrumbs.length === 0) {
-    crumbs = [{ text: 'Kibana' }];
+    crumbs = [];
   }
 
   crumbs = crumbs.map((breadcrumb, i) => ({
